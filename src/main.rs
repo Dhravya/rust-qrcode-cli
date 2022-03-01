@@ -1,5 +1,6 @@
 use clap::Parser;
 use std::io::Write;
+use viuer::{print_from_file, Config};
 
 // Simple CLI to make QR codes
 #[derive(Parser, Debug)]
@@ -36,4 +37,16 @@ fn main() {
 
     println!("QR code saved to {}", args.output.join("qrcode.png").display());
 
+    let conf = Config {
+        // set offset
+        x: 4,
+        y: 4,
+        // set dimensions
+        width: Some(80),
+        height: Some(40),
+        ..Default::default()
+    };
+
+    // Run viu to open the file in terminal
+    print_from_file(args.output.join("qrcode.png").to_str().unwrap(), &conf).expect("Image printing failed.");
 }
