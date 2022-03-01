@@ -35,8 +35,7 @@ fn main() {
     // Save the body to file
     file_.write_all(&body).unwrap();
 
-    println!("QR code saved to {}", args.output.join("qrcode.png").display());
-
+    
     let conf = Config {
         // set offset
         x: 4,
@@ -49,4 +48,5 @@ fn main() {
 
     // Run viu to open the file in terminal
     print_from_file(args.output.join("qrcode.png").to_str().unwrap(), &conf).expect("Image printing failed.");
+    println!("QR code saved to {}", args.output.join("qrcode.png").display());
 }
