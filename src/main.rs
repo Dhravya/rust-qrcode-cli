@@ -4,8 +4,8 @@ use std::io::Write;
 // Simple CLI to make QR codes
 #[derive(Parser, Debug)]
 struct Cli {
-    // The information contained by the QR code
     #[clap(short = 'd', long = "data")]
+    // The information contained by the QR code
     data: String,
 
     #[clap(short = 'o', long = "output", default_value = ".")]
@@ -34,6 +34,6 @@ fn main() {
     // Save the body to file
     file_.write_all(&body).unwrap();
 
-    println!("{:?}", body);
+    println!("QR code saved to {}", args.output.join("qrcode.png").display());
 
 }
