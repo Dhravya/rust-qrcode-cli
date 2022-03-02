@@ -12,7 +12,12 @@ struct Cli {
     #[clap(short = 'o', long = "output", default_value = ".")]
     #[clap(parse(from_os_str))]
     output: std::path::PathBuf,
+
+    #[clap(short = 's')]
+    #[clap(long = "show")]
+    display: bool,
 }
+
 
 fn main() {
     let args = Cli::parse();
@@ -46,7 +51,9 @@ fn main() {
         ..Default::default()
     };
 
-    // Run viu to open the file in terminal
-    print_from_file(args.output.join("qrcode.png").to_str().unwrap(), &conf).expect("Image printing failed.");
     println!("QR code saved to {}", args.output.join("qrcode.png").display());
+
+    if args.display {
+        print_from_file(args.output.join("qrcode.png").to_str().unwrap(), &conf).expect("Image printing failed.");
+    }
 }
