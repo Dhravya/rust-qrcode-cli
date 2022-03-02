@@ -1,7 +1,10 @@
 [package]
 name = "qrcode-cli"
+authors = ["Dhravya Shah"]
 version = "0.2.0"
 edition = "2021"
+description = "A Simple CLI tool to generate QR Code"
+license = "MIT"
 
 [dependencies]
 clap = { version = "3.0", features = ["derive"] }
