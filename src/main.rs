@@ -72,9 +72,9 @@ fn main() {
     // Get the image data
     let mut data = Vec::new();
     res.read_to_end(&mut data).unwrap();
-    let copy_data = String::from_utf8_lossy(data.as_slice()).to_string();
+    
     // Check if data is error
-    if copy_data.starts_with("{\"success\":0,") {
+    if String::from_utf8_lossy(data.as_slice()).to_string().starts_with("{\"success\":0,") {
         println!("{}", String::from_utf8(data).unwrap());
         return;
     }
