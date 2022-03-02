@@ -48,13 +48,22 @@ fn main() {
     assert!(args.mask <= 5, "Mask must be less than 6");
     assert!(args.drawer <= 6, "Drawer number must be between 1 and 6");
 
+    let mut url = format!(
+            "https://api.dhravya.me/qrcode?query={}",
+            args.data
+        );
+
+    if args.mask != 1 {
+        url.push_str(&format!("&mask={}", args.mask));
+        url.push_str(&format!("&drawer={}", args.drawer));
+        println!("Warning: If mask and drawer are provided, there will be no FG and BG");
+    }
+    else{
+        url.push_str(&format!("&fg={}&bg={}", args.foreground, args.background));
+    }
     // Using blocking request
     let mut res = ureq::get(
-        format!(
-            "https://api.dhravya.me/qrcode?query={}&drawer={}&mask={}&fg={}&bg={}",
-            args.data, args.drawer, args.mask, args.foreground, args.background
-        )
-        .as_str(),
+        url.as_str()
     )
     .call()
     .unwrap()
