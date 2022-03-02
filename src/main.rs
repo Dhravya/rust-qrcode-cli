@@ -74,7 +74,7 @@ fn main() {
     res.read_to_end(&mut data).unwrap();
     
     // Check if data is error
-    if String::from_utf8_lossy(data.as_slice()).to_string().starts_with("{\"success\":0,") {
+    if data.starts_with(b"{\"success\":0,") {
         println!("{}", String::from_utf8(data).unwrap());
         return;
     }
